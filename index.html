@@ -264,6 +264,7 @@
   .band-top .date, .band-top .tagline, .band-top .kicker { text-shadow: 0 1px 6px rgba(20,13,5,.55); }
   .band-top .tagline { color: var(--band-ink); }
   .band-top .kicker { text-shadow: 0 1px 3px rgba(20,13,5,.8), 0 0 10px rgba(20,13,5,.6); }
+  .entry.has-photo::before { filter: none; inset: 0; border-radius: 22px; }
 </style>
 </head>
 <body>
@@ -573,7 +574,7 @@ async function viewDay(key) {
   for (const e of list) {
     const t = TYPES[e.type] || TYPES.did;
     const card = document.createElement("div");
-    card.className = `entry ${t.cls}`;
+    card.className = `entry ${t.cls}${e.photo ? " has-photo" : ""}`;
     card.innerHTML = `
       ${e.note ? `<p>${esc(e.note)}</p>` : ""}
       ${e.photo ? `<img alt="" src="${objUrl(e.photo)}">` : ""}
