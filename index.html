@@ -558,7 +558,6 @@ async function viewDay(key) {
       <div class="d">${isToday ? "Today" : esc(date.toLocaleDateString(undefined, { weekday: "long" }))}<small>${esc(date.toLocaleDateString(undefined, { day: "numeric", month: "long", year: "numeric" }))}</small></div>
       <button id="next" aria-label="Next day" ${isToday || key > today ? "disabled" : ""}>›</button>
     </div>
-    ${list.length ? `<p class="summary">${list.length} good ${list.length === 1 ? "thing" : "things"}${isToday ? " today" : ""}.</p>` : ""}
     <div id="list"></div>`;
 
   $("#home").onclick = () => (location.hash = "#/");
