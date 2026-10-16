@@ -250,6 +250,12 @@
   .prompt { color: #3F6D8C; }
   @media (prefers-color-scheme: dark) { :root:not([data-theme="light"]) .prompt { color: #8DB5D1; } }
   :root[data-theme="dark"] .prompt { color: #8DB5D1; }
+
+  .welcome { margin: 14px 14px 0; padding: 14px 16px; border-radius: 20px; background: var(--card); border: 1.5px solid var(--line); color: var(--ink); font-size: 15px; line-height: 1.45; position: relative; z-index: 1; }
+  .welcome p { margin: 0 0 6px; font-weight: 600; }
+  .welcome p.tip { font-weight: 500; color: var(--muted); }
+  .welcome button { appearance: none; border: 0; background: none; font: inherit; font-weight: 800; color: var(--ink); padding: 6px 0 0; cursor: pointer; text-decoration: underline; text-underline-offset: 3px; }
+  .big-buttons { margin-top: 0 !important; }
 </style>
 </head>
 <body>
@@ -364,6 +370,22 @@ async function viewHome() {
         </div>
       </div>
     </div>`;
+
+  // One-time welcome (and a home-screen tip on phones). Remembered per device.
+  const WKEY = "raindrops-welcome";
+  let seenWelcome = false;
+  try { seenWelcome = !!localStorage.getItem(WKEY); } catch (_) {}
+  if (!seenWelcome) {
+    const ua = navigator.userAgent || "";
+    const standalone = window.matchMedia("(display-mode: standalone)").matches || navigator.standalone;
+    const ios = /iPhone|iPad|iPod/.test(ua), android = /Android/.test(ua);
+    const tip = standalone ? "" : ios ? "Tip: tap Share, then Add to Home Screen, so Raindrops sits with your other apps."
+      : android ? "Tip: open the browser menu, then Add to Home screen, so Raindrops sits with your other apps." : "";
+    const w = document.createElement("div"); w.className = "welcome";
+    w.innerHTML = `<p>Tap what fits. Add a photo, a few words, or just speak. It saves itself.</p>${tip ? `<p class="tip">${tip}</p>` : ""}<button type="button">Got it</button>`;
+    w.querySelector("button").onclick = () => { try { localStorage.setItem(WKEY, "1"); } catch (_) {} w.remove(); };
+    app.querySelector(".big-buttons").before(w);
+  }
   app.querySelectorAll(".big, .slim").forEach(b => b.onclick = () => (location.hash = "#/new/" + b.dataset.type));
   $("#review").onclick = () => (location.hash = "#/day/" + dayKey(now));
   $("#calendar").onclick = () => (location.hash = "#/calendar/" + dayKey(now).slice(0, 7));
