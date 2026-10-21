@@ -301,7 +301,7 @@
   .compose textarea { min-height: 120px; }
 
   .lede { font-size: 20px; line-height: 1.35; margin: 20px 20px 6px; }
-  .lede-sub { font-size: clamp(10px, calc((100vw - 42px) / 29.5), 13px); white-space: nowrap; color: var(--muted); font-weight: 600; margin: 0 20px 6px; letter-spacing: -.01em; }
+  .lede-sub { font-size: clamp(10px, calc((100vw - 42px) / 29), 13px); white-space: nowrap; color: var(--muted); font-weight: 600; margin: 0 20px 16px; letter-spacing: -.01em; }
   .lede.lede-end { margin-top: 0; margin-bottom: 16px; }
   .welcome + .lede { margin-top: 16px; }
   .compose .cap, .compose .save { --sel: var(--did); }
@@ -423,8 +423,7 @@ async function viewHome() {
         <div class="date">${esc(fmtLong(now))}</div>
       </div>
       <p class="lede">Don't let the little good things disappear. Hold onto them here, and come back to them at the end of the day.</p>
-      <p class="lede-sub">(Something beautiful. Something kind. A good thing you did.)</p>
-      <p class="lede lede-end">Each is precious, and together they are powerful.</p>
+      <p class="lede-sub">Something beautiful. Something kind. A good thing you did.</p>
       <div class="compose">
         <div class="capture">
           <button class="cap" id="photoBtn">${ICON_CAM}<span>Photo</span></button>
