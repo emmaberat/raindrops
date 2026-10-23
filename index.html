@@ -385,6 +385,60 @@
   .center .lede { text-shadow: 0 0 4px rgba(18,36,8,.85), 0 1px 14px rgba(18,36,8,.75), 0 0 28px rgba(18,36,8,.55); }
   .center .lede-sub { text-shadow: 0 0 4px rgba(18,36,8,.9), 0 1px 10px rgba(18,36,8,.8); font-weight: 700; }
   .band-top { background: linear-gradient(rgba(18,36,8,.55), rgba(18,36,8,.30)); }
+
+  /* Layout v4: deep, moody daisy field; calm hierarchy; readable words */
+  .home::before { background-image: linear-gradient(rgba(10, 30, 14, .46), rgba(10, 30, 14, .46)), var(--hero-img); background-size: 100% 100%; }
+  .band-top { background: #12301A; border-bottom: 0; padding: max(12px, env(safe-area-inset-top)) 16px 12px; color: #FFFDF4; box-shadow: 0 2px 10px rgba(0,0,0,.25); }
+  .band-top .kicker { color: #BFDDF3; }
+  .band-top .date { color: #FFFDF4; }
+  .zone-top { padding: 60px 20px 8px; }
+  .zone-top .capture { align-items: center; margin: 0 0 10px; gap: 20px; zoom: 1 !important; }
+  .zone-top textarea { margin: 0; }
+  .zone-top .done-wrap { zoom: 1 !important; display: flex; justify-content: center; margin-top: 6px; }
+  .center { margin: 0 16px; padding: 18px 20px 16px; border-radius: 26px; background: rgba(10, 30, 14, .64); -webkit-backdrop-filter: blur(6px); backdrop-filter: blur(6px); }
+  .center .lede { color: #fff; font-weight: 600; font-size: 22px; line-height: 1.35; margin: 0 0 8px; text-shadow: none; text-wrap: balance; }
+  .center .lede .short { display: none; }
+  .center.compact .lede .full, .center.compact .lede-sub { display: none; }
+  .center.compact .lede .short { display: inline; }
+  .center.compact .lede { margin: 0; }
+  .center .lede-sub { color: #E9F2DC; opacity: 1; font-weight: 600; text-shadow: none; margin: 0; }
+  .zone-bottom { padding: 14px 14px max(20px, env(safe-area-inset-bottom)); }
+  .zone-bottom .review-link { background: rgba(255,255,255,.94); }
+  .shape.heart { width: 100px; height: 91px; }
+  .shape.heart .lab { font-size: 22px; padding-bottom: 8px; }
+  @media (max-height: 760px) {
+    .shape.tri { width: 124px; height: 111px; } .shape.tri .lab { padding-top: 26px; font-size: 21px; }
+    .shape.cir { width: 100px; height: 100px; } .shape.cir .lab { font-size: 19px; }
+    .shape.heart { width: 86px; height: 78px; } .shape.heart .lab { font-size: 19px; padding-bottom: 6px; }
+    .zone-top textarea { min-height: 54px; }
+    .center .lede { font-size: 20px; }
+  }
+
+  .zone-top textarea { height: 64px; min-height: 0; resize: none; }
+  .zone-top .hint { margin: 2px 0 0; font-size: 14px; }
+  .center .lede-sub { white-space: normal; font-size: 13px; line-height: 1.35; text-wrap: balance; }
+  @media (max-height: 760px) {
+    .zone-top { padding-top: 56px; }
+    .zone-top textarea { height: 52px; }
+    .zone-top .capture { margin-bottom: 8px; }
+    .center { padding: 14px 18px 12px; }
+  }
+
+  /* Fit first: tall phones centre the words exactly; shorter ones spread the space evenly */
+  .home { grid-template-rows: auto auto auto; align-content: space-between; }
+  @media (min-height: 800px) { .home { grid-template-rows: minmax(0, 1fr) auto minmax(0, 1fr); align-content: normal; } }
+  .shape.tri { width: 136px; height: 122px; } .shape.tri .lab { padding-top: 30px; font-size: 22px; }
+  .shape.cir { width: 108px; height: 108px; } .shape.cir .lab { font-size: 20px; }
+  .shape.heart { width: 92px; height: 84px; } .shape.heart .lab { font-size: 20px; padding-bottom: 7px; }
+  .zone-top textarea { height: 58px; }
+  @media (max-height: 760px) {
+    .shape.tri { width: 120px; height: 108px; } .shape.tri .lab { padding-top: 26px; font-size: 20px; }
+    .shape.cir { width: 96px; height: 96px; } .shape.cir .lab { font-size: 18px; }
+    .shape.heart { width: 82px; height: 74px; } .shape.heart .lab { font-size: 18px; padding-bottom: 6px; }
+    .zone-top textarea { height: 52px; }
+  }
+
+  @media (min-height: 800px) { .zone-top { padding-top: 54px; } .zone-top .capture { margin-bottom: 8px; } .zone-top textarea { height: 54px; } .zone-bottom { padding-bottom: max(16px, env(safe-area-inset-bottom)); } }
 </style>
 </head>
 <body>
@@ -504,16 +558,16 @@ async function viewHome() {
         </div>
         <div id="attachments"></div>
         <textarea id="note"></textarea>
+        <div class="done-wrap">
+        <button class="shape heart" id="save"><svg class="bg" viewBox="0 0 150 136" aria-hidden="true"><path d="M75 124C30 92 12 66 12 44C12 24 27 12 43 12C57 12 69 20 75 32C81 20 93 12 107 12C123 12 138 24 138 44C138 66 120 92 75 124Z" fill="currentColor" stroke="currentColor" stroke-width="12" stroke-linejoin="round"/><path class="in" d="M75 124C30 92 12 66 12 44C12 24 27 12 43 12C57 12 69 20 75 32C81 20 93 12 107 12C123 12 138 24 138 44C138 66 120 92 75 124Z" fill="#fff" stroke="#fff" stroke-width="2" stroke-linejoin="round"/></svg><span class="lab">Done</span></button>
+        </div>
         <input type="file" id="photoInput" accept="image/*" capture="environment" hidden>
         <input type="file" id="audioInput" accept="audio/*" capture hidden>
         <p class="hint" id="hint"></p>
       </div>
       <div class="center">
-        <p class="lede">Hold onto good little things here, and come back to them at the end of the day.</p>
+        <p class="lede"><span class="full">Hold onto good little things here, and come back to them at the end of the day.</span><span class="short">Hold onto good little things.</span></p>
         <p class="lede-sub">Something beautiful. Something kind. A good thing you did.</p>
-        <div class="done-wrap">
-        <button class="shape heart" id="save"><svg class="bg" viewBox="0 0 150 136" aria-hidden="true"><path d="M75 124C30 92 12 66 12 44C12 24 27 12 43 12C57 12 69 20 75 32C81 20 93 12 107 12C123 12 138 24 138 44C138 66 120 92 75 124Z" fill="currentColor" stroke="currentColor" stroke-width="12" stroke-linejoin="round"/><path class="in" d="M75 124C30 92 12 66 12 44C12 24 27 12 43 12C57 12 69 20 75 32C81 20 93 12 107 12C123 12 138 24 138 44C138 66 120 92 75 124Z" fill="#fff" stroke="#fff" stroke-width="2" stroke-linejoin="round"/></svg><span class="lab">Done</span></button>
-        </div>
       </div>
       <div class="zone-bottom">
         <div class="row">
@@ -524,6 +578,13 @@ async function viewHome() {
     </div>`;
 
   const home = $("#home"), note = $("#note"), att = $("#attachments"), hint = $("#hint"), micBtn = $("#micBtn"), micLabel = $("#micLabel");
+
+  // After the first few days the paragraph shrinks to one line.
+  try {
+    const DK = "raindrops-days", seen = JSON.parse(localStorage.getItem(DK) || "[]"), td = dayKey(now);
+    if (!seen.includes(td)) { seen.push(td); localStorage.setItem(DK, JSON.stringify(seen.slice(-60))); }
+    if (seen.length > 3) $(".center").classList.add("compact");
+  } catch (_) {}
 
   // One-time welcome (and a home-screen tip on phones). Remembered per device.
   const WKEY = "raindrops-welcome";
