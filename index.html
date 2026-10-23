@@ -10,7 +10,7 @@
 <link rel="manifest" href="manifest.webmanifest">
 <meta name="apple-mobile-web-app-title" content="Raindrops">
 <meta name="apple-mobile-web-app-capable" content="yes">
-<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght,SOFT@9..144,500..700,0..100&family=Open+Sans:wght@500;600;700;800&display=swap">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght,SOFT@9..144,500..700,0..100&family=Quicksand:wght@400;500;600&family=Open+Sans:wght@500;600;700;800&display=swap">
 <style>
   /* Flat, full-width blocks of sun colour. A soft serif for the big words, plain sans for everything else. */
   :root {
@@ -307,6 +307,7 @@
   .compose .cap, .compose .save { --sel: var(--did); }
   .compose .cap::before, .compose .save::before { filter: url(#clothF); inset: 2px; border-radius: 18px; }
   .compose .cap { min-height: 96px; }
+  .lede { font-family: "Quicksand", "Nunito", system-ui, sans-serif; font-weight: 500; font-variation-settings: normal; font-size: 24px; line-height: 1.32; letter-spacing: 0; }
 </style>
 </head>
 <body>
@@ -422,7 +423,7 @@ async function viewHome() {
         <div class="kicker">Raindrops</div>
         <div class="date">${esc(fmtLong(now))}</div>
       </div>
-      <p class="lede">Don't let the little good things disappear. Hold onto them here, and come back to them at the end of the day.</p>
+      <p class="lede">Hold onto good little things here, and come back to them at the end of the day.</p>
       <p class="lede-sub">Something beautiful. Something kind. A good thing you did.</p>
       <div class="compose">
         <div class="capture">
